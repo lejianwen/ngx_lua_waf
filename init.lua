@@ -191,7 +191,9 @@ function denycc()
         local req,_=limit:get(token)
         if req then
             if req > CCcount then
-                 ngx.exit(503)
+                say_html()
+                log('CC',ngx.var.request_uri,"-",getClientIp())
+                -- ngx.exit(503)
                 return true
             else
                  limit:incr(token,1)
